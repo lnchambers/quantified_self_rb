@@ -19,6 +19,14 @@ class Api::V1::FoodsController < Api::V1::BaseController
     end
   end
 
+  def destroy
+    food = Food.find(params[:id])
+    food.destroy!
+    render :json => { success: "The food has been destroyed permanently." }, :status => 204
+  rescue Exception
+    render :json => { error: "Well, this is awkward. The food already doesn't exist." }, :status => 404
+  end
+
   private
 
     def food_params

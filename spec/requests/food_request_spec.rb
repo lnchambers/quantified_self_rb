@@ -64,10 +64,17 @@ describe "Food Requests" do
     expect(parsed[:error]).to eq("Your food is in the garbage. Please try again.")
   end
 
-  it "DELETE /api/v1/foods/:id returns 204 if food successfully delete" do
+  it "DELETE /api/v1/foods/:id returns 204 if food successfully deleted" do
     delete "/api/v1/foods/2"
 
     expect(response).to be_success
-    expect(response.status_code).to eq(204)
+    expect(response.status).to eq(204)
+  end
+
+  it "DELETE /api/v1/foods/:id returns 404 if food isn't deleted" do
+    delete "/api/v1/foods/10"
+
+    expect(response).to_not be_success
+    expect(response.status).to eq(404)
   end
 end
