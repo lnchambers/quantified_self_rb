@@ -51,6 +51,16 @@ describe "Food Requests" do
 
     expect(parsed[:name]).to eq("Chevrolet")
     expect(parsed[:calories]).to eq(2)
-    expect(parsed[:id]).to eq(3)
+    expect(parsed[:id]).to eq(4)
+  end
+
+  it "POST /api/v1/foods returns 404 if your food sucks" do
+    params = {:food => {:name => "Chevrolet"}}.to_json
+    headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    post "/api/v1/foods", params: params, headers: headers
+
+    expect(response).to_not be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+    expect(parsed[:error]).to eq("Your food is in the garbage. Please try again.")
   end
 end
