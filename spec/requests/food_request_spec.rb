@@ -79,7 +79,7 @@ describe "Food Requests" do
   end
 
   it "PATCH /api/v1/foods/:id updates a food item" do
-    params = {:food => {:name => "Opakawagalaga Surprise", :calories => 100000000000}}
+    params = {:food => {:name => "Opakawagalaga Surprise", :calories => 100000}}
     headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
     patch "/api/v1/foods/#{@food_2.id}", params: params.to_json, headers: headers
 
@@ -87,7 +87,16 @@ describe "Food Requests" do
     parsed = JSON.parse(response.body, symbolize_names: true)
 
     expect(parsed[:name]).to eq("Opakawagalaga Surprise")
-    expect(parsed[:calories]).to eq(100000000000)
+    expect(parsed[:calories]).to eq(100000)
     expect(parsed[:id]).to eq(@food_2.id)
+  end
+
+  it "PATCH /api/v1/foods/:id returns 404 if food item doesn't exist" do
+    params = {:food => {:name => "Opakawagalaga Surprise", :calories => 100000}}
+    headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    patch "/api/v1/foods/10", params: params.to_json, headers: headers
+
+    expect(response).to_not be_success
+    expect(response.status).to be(404)
   end
 end
