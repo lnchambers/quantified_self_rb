@@ -63,4 +63,11 @@ describe "Food Requests" do
     parsed = JSON.parse(response.body, symbolize_names: true)
     expect(parsed[:error]).to eq("Your food is in the garbage. Please try again.")
   end
+
+  it "DELETE /api/v1/foods/:id returns 204 if food successfully delete" do
+    delete "/api/v1/foods/2"
+
+    expect(response).to be_success
+    expect(response.status_code).to eq(204)
+  end
 end
