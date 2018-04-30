@@ -40,4 +40,17 @@ describe "Food Requests" do
 
     expect(parsed[:error]).to eq("Your food has been eaten and no longer exists")
   end
+
+  it "POST /api/v1/foods creates a new food WOW" do
+    params = {:food => {:name => "Chevrolet", :calories => 2}}.to_json
+    headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    post "/api/v1/foods", params: params, headers: headers
+
+    expect(response).to be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:name]).to eq("Chevrolet")
+    expect(parsed[:calories]).to eq(2)
+    expect(parsed[:id]).to eq(3)
+  end
 end
