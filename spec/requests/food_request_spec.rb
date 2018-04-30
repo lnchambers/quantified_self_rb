@@ -77,4 +77,17 @@ describe "Food Requests" do
     expect(response).to_not be_success
     expect(response.status).to eq(404)
   end
+
+  it "PATCH /api/v1/foods/:id updates a food item" do
+    params = {:food => {:name => "Opakawagalaga Surprise", :calories => 100000000000}}
+    headers = { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
+    patch "/api/v1/foods/#{@food_2.id}", params: params.to_json, headers: headers
+
+    expect(response).to be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:name]).to eq("Opakawagalaga Surprise")
+    expect(parsed[:calories]).to eq(100000000000)
+    expect(parsed[:id]).to eq(@food_2.id)
+  end
 end
