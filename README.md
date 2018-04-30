@@ -1,3 +1,4 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/lnchambers/quantified_self_rb.png?columns=all)](https://waffle.io/lnchambers/quantified_self_rb?utm_source=badge)
 # README
 
 This README would normally document whatever steps are necessary to get the
