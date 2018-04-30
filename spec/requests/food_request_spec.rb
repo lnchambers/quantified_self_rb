@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "Food Requests" do
-  before :each do
+  before :all do
     @food = create(:food)
     @food_2 = create(:food, name: "Opakawagalaga Eupanifahorious")
     @food_3 = create(:food, name: "Benedicty Humbleburgers")
@@ -21,7 +21,7 @@ describe "Food Requests" do
     expect(parsed[2][:calories]).to eq(@food_3.calories)
   end
 
-  it "GET /api/v1/foods/:id returns one food matching the id or 404 if not found" do
+  it "GET /api/v1/foods/:id returns one food matching the id" do
     get "/api/v1/foods/2"
 
     expect(response).to be_success
@@ -30,5 +30,14 @@ describe "Food Requests" do
     expect(parsed[:name]).to eq(@food_2.name)
     expect(parsed[:calories]).to eq(@food_2.calories)
     expect(parsed[:id]).to eq(@food_2.id)
+  end
+
+  it "GET /api/v1/foods/:id returns 404 if not found" do
+    get "/api/v1/foods/4"
+
+    expect(response.status).to eq(404)
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:error]).to eq("Your food has been eaten and no longer exists")
   end
 end
