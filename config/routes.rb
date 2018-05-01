@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :foods
-      resources :meals, only: [:index]
-      get '/meals/:id/foods', to: 'meals#show'
-      post '/api/v1/meals/:id/foods/:id', to: 'meals#create'
+      resources :meals, only: [:index] do
+        get 'foods', to: 'meals#show'
+        post 'foods/:id', to: 'meals#create'
+      end
     end
   end
 end
