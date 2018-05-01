@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :meal do
-    name "MyString"
+    name "Brake Fast"
   end
 end
