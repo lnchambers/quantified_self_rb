@@ -53,4 +53,13 @@ describe "Meal Requests" do
 
     expect(parsed[:message]).to eq("Successfully added #{@food.name} to #{@meal_2.name}")
   end
+
+  it "DELETE /api/v1/meals/:meal_id/foods/:id deletes a food to meal join" do
+    delete "/api/v1/meals/#{@meal_2.id}/foods/#{@food_2.id}"
+
+    expect(response).to be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:message]).to eq("Successfully removed #{@food_2.name} from #{@meal_2.name}")
+  end
 end
