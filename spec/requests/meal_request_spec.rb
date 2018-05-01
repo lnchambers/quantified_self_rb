@@ -44,4 +44,13 @@ describe "Meal Requests" do
     expect(parsed[:name]).to eq(@meal_2.name)
     expect(parsed[:foods][0][:name]).to eq(@food_2.name)
   end
+
+  it "POST /api/v1/meals/:meal_id/foods/:id should create a food under a meal" do
+    post "/api/v1/meals/#{@meal_2.id}/foods/#{@food.id}"
+
+    expect(response).to be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:message]).to eq("Successfully added #{@food.name} to #{@meal_2.name}")
+  end
 end
