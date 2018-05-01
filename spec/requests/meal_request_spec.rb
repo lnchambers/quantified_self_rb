@@ -33,4 +33,15 @@ describe "Meal Requests" do
     expect(parsed[2][:foods][1][:name]).to eq(@food_2.name)
     expect(parsed[2][:foods][2][:name]).to eq(@food.name)
   end
+
+  it "GET /api/v1/meals/:meal_id/foods returns all the foods that belong to a certain meal" do
+    get "/api/v1/meals/#{@meal_2.id}/foods"
+
+    expect(response).to be_success
+    parsed = JSON.parse(response.body, symbolize_names: true)
+
+    expect(parsed[:id]).to eq(@meal_2.id)
+    expect(parsed[:name]).to eq(@meal_2.name)
+    expect(parsed[:foods][0][:name]).to eq(@food_2.name)
+  end
 end
