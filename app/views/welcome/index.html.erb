@@ -1,4 +1,5 @@
 <h1>Quantified Self API Docs</h1>
+<h3>Food Endpoints</h3>
 <h2>GET /api/v1/foods</h2>
 <p>Return all foods in the database</p>
 <h2>GET /api/v1/foods/:id</h2>
@@ -9,3 +10,12 @@
 <p>Deletes a food record from the database by id</p>
 <h2>PATCH /api/v1/foods/:id</h2>
 <p>Updates a food record by id</p>
+<h3>Meal Endpoints</h3>
+<h2>GET /api/v1/meals</h2>
+<p>Returns all meals with their associated foods</p>
+<h2>GET /api/v1/meals/:meal_id/foods</h2>
+<p>Returns all the foods that belong to the meal id</p>
+<h2>POST /api/v1/meals/:meal_id/foods/:id</h2>
+<p>Creates a food that belongs to the meal id</p>
+<h2>DELETE /api/v1/meals/:meal_id/foods/:id</h2>
+<p>Removes a food that belongs to the meal id</p>
