@@ -5,7 +5,7 @@ This API is designed to interact with the Quantified Self front end located [her
 
 # Endpoints
 
-##Food Endpoints
+## Food Endpoints
 
 `GET /api/v1/foods`
 
@@ -28,7 +28,7 @@ This API is designed to interact with the Quantified Self front end located [her
   -Updates a food record by id
   
 
-##Meal Endpoints
+## Meal Endpoints
 
 `GET /api/v1/meals`
 
